@@ -40,9 +40,9 @@
   "author": "mrbar42",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "8.10.48",
-    "ts-node": "^8.5.2",
-    "tslint": "^5.20.1",
-    "typescript": "^3.7.2"
+    "@types/node": "^12.12.30",
+    "ts-node": "^8.7.0",
+    "tslint": "^6.1.0",
+    "typescript": "^3.8.3"
   }
 }
