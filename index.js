@@ -51,6 +51,8 @@ var Graceful = /** @class */ (function () {
         return function () { return Graceful.off('exit', listener); };
     };
     Graceful.off = function (signal, listener) {
+        if (signal !== 'exit')
+            throw new Error('Only supports \'exit\' signal');
         var index = Graceful.listeners.indexOf(listener);
         if (index !== -1)
             Graceful.listeners.splice(index, 1);

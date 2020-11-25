@@ -1,6 +1,6 @@
 {
   "name": "node-graceful",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Graceful process exit manager. allows waiting on multiple async services.",
   "main": "index.js",
   "repository": {
@@ -29,7 +29,7 @@
     "test:lint": "tsc --noEmit && tslint -c tslint.json --fix tests/*.ts",
     "test": "npm run test:lint && npm run test:unit && npm run test:unit-ts",
     "build": "tsc --build tsconfig.json",
-    "prepublishOnly": "npm run test && npm run build"
+    "prepublishOnly": "npm run build && npm run test"
   },
   "files": [
     "index.ts",
