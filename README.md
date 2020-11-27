@@ -16,6 +16,17 @@ Had any problem? open an [issue](https://github.com/mrbar42/node-graceful/issues
 
 ## Quick example
 
+Typescript
+```typescript
+import Graceful from 'node-graceful';
+Graceful.captureExceptions = true;
+
+Graceful.on('exit', async () => {
+  await server.close();
+});
+```
+
+Plain JS
 ```javascript
 const Graceful = require('node-graceful');
 Graceful.captureExceptions = true;
@@ -31,16 +42,6 @@ Graceful.on('exit', (signal) => {
         console.log("Another independent listener!");
         setTimeout(() => resolve(), 1000);    
     });
-});
-```
-
-Typescript
-```typescript
-import Graceful from 'node-graceful';
-Graceful.captureExceptions = true;
-
-Graceful.on('exit', async () => {
-  await server.close();
 });
 ```
 

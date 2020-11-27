@@ -65,6 +65,8 @@ export default class Graceful {
     }
 
     public static off(signal: 'exit', listener: GracefulListener) {
+        if (signal !== 'exit') throw new Error('Only supports \'exit\' signal');
+
         const index = Graceful.listeners.indexOf(listener);
         if (index !== -1) Graceful.listeners.splice(index, 1);
 
