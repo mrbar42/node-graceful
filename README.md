@@ -230,7 +230,7 @@ Graceful.captureExceptions = true;
 throw new Error('DANG!'); // this will now trigger graceful shutdown 
 ```
 
-#### Graceful.captureExceptions = false {boolean}
+#### Graceful.captureRejections = false {boolean}
 
 Whether to treat `unhandledRejection` event as a terminating event and trigger graceful shutdown.
 On newer `node` versions `unhandledRejection` is in-fact a terminating event
