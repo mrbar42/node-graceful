@@ -1,10 +1,10 @@
-import Graceful, {GracefulListener} from "../";
+import Graceful from "../";
 
 const listener = (signal: string, event?: object) => void 0;
 const listenerPromise = (signal: string, event?: object) => Promise.resolve("abc");
 const listenerPromise1 = (signal: string, event?: object) => Promise.resolve({});
-const listenerPromise2 = (signal: string, event?: object) => new Promise((resolve) => resolve());
-const listenerPromise3 = (signal: string, event?: object) => new Promise((resolve) => resolve());
+const listenerPromise2 = (signal: string, event?: object) => new Promise<void>((resolve) => resolve());
+const listenerPromise3 = (signal: string, event?: object) => new Promise<void>((resolve) => resolve());
 const listenerPromise4 = () => null;
 
 Graceful.on("exit", listener);
