@@ -138,14 +138,16 @@ export default class Graceful {
     private static updateRegistration() {
         if (Graceful.listeners.length && !Graceful.isRegistered) {
             for (const deadlySignal of Graceful.DEADLY_SIGNALS) {
-                Graceful.signalsListeners[deadlySignal] = () => Graceful.onDeadlyEvent(deadlySignal);
-                process.on(deadlySignal as any, Graceful.signalsListeners[deadlySignal]);
+                const listener = () => Graceful.onDeadlyEvent(deadlySignal);
+                Graceful.signalsListeners[deadlySignal] = listener
+                process.on(deadlySignal as any, listener);
             }
             Graceful.isRegistered = true
         } else if (!Graceful.listeners.length && Graceful.isRegistered) {
             for (const deadlySignal of Graceful.DEADLY_SIGNALS) {
-                if (Graceful.signalsListeners[deadlySignal]) {
-                    process.removeListener(deadlySignal as any, Graceful.signalsListeners[deadlySignal]);
+                const listener = Graceful.signalsListeners[deadlySignal]
+                if (listener) {
+                    process.removeListener(deadlySignal, listener);
                     delete Graceful.signalsListeners[deadlySignal];
                 }
             }

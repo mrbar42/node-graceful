@@ -22,7 +22,7 @@ var Graceful = /** @class */ (function () {
                 process.removeListener('uncaughtException', Graceful.exceptionListener);
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Graceful, "captureRejections", {
@@ -40,7 +40,7 @@ var Graceful = /** @class */ (function () {
                 process.removeListener('unhandledRejection', Graceful.rejectionListener);
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Graceful.on = function (signal, listener) {
@@ -116,8 +116,9 @@ var Graceful = /** @class */ (function () {
     Graceful.updateRegistration = function () {
         if (Graceful.listeners.length && !Graceful.isRegistered) {
             var _loop_1 = function (deadlySignal) {
-                Graceful.signalsListeners[deadlySignal] = function () { return Graceful.onDeadlyEvent(deadlySignal); };
-                process.on(deadlySignal, Graceful.signalsListeners[deadlySignal]);
+                var listener = function () { return Graceful.onDeadlyEvent(deadlySignal); };
+                Graceful.signalsListeners[deadlySignal] = listener;
+                process.on(deadlySignal, listener);
             };
             for (var _i = 0, _a = Graceful.DEADLY_SIGNALS; _i < _a.length; _i++) {
                 var deadlySignal = _a[_i];
@@ -128,8 +129,9 @@ var Graceful = /** @class */ (function () {
         else if (!Graceful.listeners.length && Graceful.isRegistered) {
             for (var _b = 0, _c = Graceful.DEADLY_SIGNALS; _b < _c.length; _b++) {
                 var deadlySignal = _c[_b];
-                if (Graceful.signalsListeners[deadlySignal]) {
-                    process.removeListener(deadlySignal, Graceful.signalsListeners[deadlySignal]);
+                var listener = Graceful.signalsListeners[deadlySignal];
+                if (listener) {
+                    process.removeListener(deadlySignal, listener);
                     delete Graceful.signalsListeners[deadlySignal];
                 }
             }
