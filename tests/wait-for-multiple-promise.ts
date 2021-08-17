@@ -2,7 +2,7 @@
 
 import Graceful from "../";
 
-const handlerSuccess = () => {
+const handlerSuccess = (): Promise<void> => {
     return new Promise((resolve) =>  {
         setTimeout(() => {
             process.stdout.write("ok");
@@ -11,8 +11,8 @@ const handlerSuccess = () => {
     });
 };
 
-const handlerReject = () => {
-    return new Promise((resolve, reject) => {
+const handlerReject = (): Promise<void> => {
+    return new Promise((_resolve, reject) => {
         setTimeout(() => {
             process.stdout.write("ok");
             reject();
