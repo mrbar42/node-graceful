@@ -5,6 +5,8 @@
     "strict": true,
     "alwaysStrict": true,
     "preserveConstEnums": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
     "sourceMap": false,
     "moduleResolution": "Node",
     "esModuleInterop": true,
