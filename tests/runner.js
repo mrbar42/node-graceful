@@ -140,9 +140,14 @@ function asyncRunner() {
     let path = require.resolve(__dirname + '/' + test.child);
     let timer;
     let ended = false;
+    const args = [path];
     // unhandled rejections default to throw since v15, warn since v10
     // we make it the same for all versions so the result will be consistent.
-    let child = execFile('node', ["--unhandled-rejections=none", path], (err, stdout) => {
+    if (Number(process.version.substring(1).split('.')[0]) >= 10) {
+        args.unshift("--unhandled-rejections=none");
+    }
+
+    let child = execFile('node', args, (err, stdout) => {
         clearTimeout(timer);
         ended = true;
         if (err && /Error/.test(err.message)) {

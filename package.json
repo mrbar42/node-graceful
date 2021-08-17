@@ -1,6 +1,6 @@
 {
   "name": "node-graceful",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "Graceful process exit manager. allows waiting on multiple async services.",
   "main": "index.js",
   "repository": {
@@ -32,7 +32,6 @@
     "prepublishOnly": "npm run build && npm run test"
   },
   "files": [
-    "index.ts",
     "index.d.ts",
     "index.js",
     "README.md"
